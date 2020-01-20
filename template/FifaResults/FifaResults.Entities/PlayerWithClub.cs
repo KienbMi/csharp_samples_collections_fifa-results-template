@@ -28,17 +28,14 @@ namespace FifaResults.Entities
             int wage,
             Club club) : base(name, nationality, age, value, wage)
         {
-            _club = club;
+            throw new NotImplementedException();
         }
 
         #endregion
 
         #region Methods
 
-        protected override string GetClubAsMarkdown()
-        {
-            return $"{Club.GetMarkdown()}";
-        }
+        // TODO
 
         #endregion
     }

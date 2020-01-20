@@ -26,8 +26,18 @@ namespace FifaResults.Entities
         {
             get
             {
-                throw new NotImplementedException();
+                double result = 0;
 
+                if (_players.Count > 0)
+                {
+                    double sum = 0;
+                    foreach (Player player in _players)
+                    {
+                        sum += player.Age;
+                    }
+                    result = sum / _players.Count;
+                }
+                return result;
             }
         }
 
@@ -35,7 +45,18 @@ namespace FifaResults.Entities
         {
             get
             {
-                throw new NotImplementedException();
+                double result = 0;
+
+                if (_players.Count > 0)
+                {
+                    double sum = 0;
+                    foreach (Player player in _players)
+                    {
+                        sum += player.Wage;
+                    }
+                    result = sum / _players.Count;
+                }
+                return result;
             }
         }
 
@@ -43,7 +64,16 @@ namespace FifaResults.Entities
         {
             get
             {
-                throw new NotImplementedException();
+                long result = 0;
+
+                if (_players.Count > 0)
+                {
+                    foreach (Player player in _players)
+                    {
+                        result += player.Value;
+                    }
+                }
+                return result;
             }
         }
 
@@ -53,7 +83,9 @@ namespace FifaResults.Entities
 
         public Club(string name, string logo)
         {
-            throw new NotImplementedException();
+            _name = name;
+            _logo = logo;
+            _players = new List<Player>();
         }
 
         #endregion
@@ -62,13 +94,23 @@ namespace FifaResults.Entities
 
         public void AddPlayer(Player player)
         {
-            throw new NotImplementedException();
+            if (player != null)
+            { 
+                if (_players.Contains(player) == false)
+                {
+                    _players.Add(player);
+                }
+            }
         }
 
 
         public string GetMarkdown()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            //sb.AppendLine("|Name|Players|AverageAge|AverageWage|OverallValue|");
+            //sb.AppendLine("|----|------:|---------:|----------:|-----------:|");
+            sb.AppendLine($"|{Name}|{Players}|{AverageAge}|{AverageWage}|{OverallValue}");
+            return sb.ToString();
         }
 
         #endregion

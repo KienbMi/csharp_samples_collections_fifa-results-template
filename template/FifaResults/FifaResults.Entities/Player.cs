@@ -31,11 +31,7 @@ namespace FifaResults.Entities
 
         public Player(string name, string nationality, int age, int value, int wage)
         {
-            _name = name;
-            _nationality = nationality;
-            _age = age;
-            _value = value;
-            _wage = wage;
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -44,17 +40,12 @@ namespace FifaResults.Entities
 
         protected virtual string GetClubAsMarkdown()
         {
-            return "vereinslos";
+            throw new NotImplementedException();
         }
 
         public string GetMarkdown()
         {
-            //sb.AppendLine("|Name|Age|Wage|Value|Nationality|Club|");
-            //sb.AppendLine("|----|--:|---:|----:|:---------:|:---|");
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"|{Name}|{Age}|{Wage}|{Value}|{Nationality}|{GetClubAsMarkdown()}|");
-
-            return sb.ToString();
+            throw new NotImplementedException();
         }
 
         #endregion
