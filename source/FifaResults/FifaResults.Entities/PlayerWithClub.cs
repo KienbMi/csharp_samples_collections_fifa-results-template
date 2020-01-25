@@ -37,7 +37,7 @@ namespace FifaResults.Entities
 
         protected override string GetClubAsMarkdown()
         {
-            return $"{Club.GetMarkdown()}";
+            return $"![Logo]({Club.Logo}) {Club.Name}";
         }
 
         #endregion

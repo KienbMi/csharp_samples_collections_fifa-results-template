@@ -10,9 +10,20 @@ namespace FifaResults.ConsoleApp
     {
         static void Main(string[] args)
         {
+            Controller cntr = new Controller();
+            cntr.LoadClubs();
+            cntr.LoadPlayersForClubs();
+            
             Console.WriteLine("Fifa 2019 Results");
+            Console.WriteLine($"Es wurden {cntr.Clubs.Count()} Clubs geladen.");
 
-            throw new NotImplementedException();
+            string markdown = cntr.GetTop10ClubsAsMarkdown();
+            WriteContentToFile("top10clubs.md", markdown);
+            markdown = cntr.GetLast10ClubsAsMarkdown();
+            WriteContentToFile("last10clubs.md", markdown);
+            markdown = cntr.GetPlayersUnder100KValueByNationAndValueAsMarkdown();
+            WriteContentToFile("players.md", markdown);
+
         }
 
         private static void WriteContentToFile(string fileName, string content)

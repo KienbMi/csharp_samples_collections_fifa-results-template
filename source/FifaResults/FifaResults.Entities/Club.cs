@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using FifaResults.Entities.Contracts;
@@ -109,8 +110,13 @@ namespace FifaResults.Entities
             StringBuilder sb = new StringBuilder();
             //sb.AppendLine("|Name|Players|AverageAge|AverageWage|OverallValue|");
             //sb.AppendLine("|----|------:|---------:|----------:|-----------:|");
-            sb.AppendLine($"|{Name}|{Players}|{AverageAge}|{AverageWage}|{OverallValue}");
+            sb.Append($"|{Name}|{_players.Count}|{AverageAge :f2}|{AverageWage.ToString("c2", CultureInfo.CreateSpecificCulture("de-DE"))}|{OverallValue.ToString("c0", CultureInfo.CreateSpecificCulture("de-DE"))}|");
             return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} , {_players.Count}, {AverageAge}, {AverageWage}, {OverallValue}";
         }
 
         #endregion

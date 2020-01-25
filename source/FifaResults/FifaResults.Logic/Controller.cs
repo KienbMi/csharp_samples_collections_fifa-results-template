@@ -77,7 +77,8 @@ namespace FifaResults.Logic
                         string clubname = data[5];
                         string logo = data[6];
 
-                        if (_clubsCache.ContainsKey(clubname) == false)
+                        if (string.IsNullOrEmpty(clubname) == false &&
+                            _clubsCache.ContainsKey(clubname) == false)
                         {
                             Club club = new Club(
                                 clubname,
@@ -225,9 +226,13 @@ namespace FifaResults.Logic
 
             StringBuilder sb = new StringBuilder(GeneratePlayerMarkdownHeader());
 
+            _players.Sort();
             foreach (Player player in _players)
             {
-                sb.AppendLine(player.GetMarkdown());
+                if (player.Value < 100000)
+                {
+                    sb.AppendLine(player.GetMarkdown());
+                }
             }
             return sb.ToString();
         }

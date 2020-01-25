@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text;
 using FifaResults.Entities.Contracts;
 
 namespace FifaResults.Entities
 {
-    public class Player : IMarkdownProvider
+    public class Player : IMarkdownProvider, IComparable<Player>
     {
         #region Fields
 
@@ -44,7 +47,7 @@ namespace FifaResults.Entities
 
         protected virtual string GetClubAsMarkdown()
         {
-            return "vereinslos";
+            return "-";
         }
 
         public string GetMarkdown()
@@ -52,9 +55,32 @@ namespace FifaResults.Entities
             //sb.AppendLine("|Name|Age|Wage|Value|Nationality|Club|");
             //sb.AppendLine("|----|--:|---:|----:|:---------:|:---|");
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"|{Name}|{Age}|{Wage}|{Value}|{Nationality}|{GetClubAsMarkdown()}|");
+            sb.Append($"|{Name}|{Age}|{Wage.ToString("c0", CultureInfo.CreateSpecificCulture("de-DE"))}|{Value.ToString("c0", CultureInfo.CreateSpecificCulture("de-DE"))}|{Nationality}|{GetClubAsMarkdown()}|");
 
             return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}, {Age}, {Wage}, {Value}";
+        }
+
+        public int CompareTo(Player other)
+        {
+            if (other == null)
+            {
+                return -1;
+            }
+
+            int result = 0;
+
+            result = Nationality.CompareTo(other.Nationality);
+            if (result == 0)
+            {
+                result = other.Value.CompareTo(Value);
+            }
+
+            return result;
         }
 
         #endregion
